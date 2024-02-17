@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import { useState } from 'react';
 import Alert from './components/Alert';
 import About from './components/About';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [mode, setmode] = useState('light')
@@ -18,7 +17,7 @@ function App() {
     });
     setTimeout(() => {
       setalerttext(null)
-    }, 1000);
+    }, 2000);
   }
   const toggleMode = ()=>{
     if(mode === 'light'){
@@ -34,13 +33,11 @@ function App() {
   return (
     <>
     <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode}/>
-    <Alert alerttext={alerttext}/>
-    <div className='container'>
+    <Alert alerttext={alerttext} mode={mode}/>
     <Routes>
-        <Route path="/" element={<TextForm labeltextbox='Paste the text below' mode={mode} setAlert={setAlert}/>}/>
-        <Route path="about" element={<About/>} />
+        <Route exact path="/" element={<TextForm labeltextbox='Paste your text below' mode={mode} setAlert={setAlert}/>}/>
+        <Route exact path="about" element={<About mode={mode}/>} />
       </Routes>
-    </div>
     </>
   );
 }
