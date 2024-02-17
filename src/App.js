@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import { useState } from 'react';
 import Alert from './components/Alert';
+import About from './components/About';
+import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [mode, setmode] = useState('light')
@@ -34,7 +36,10 @@ function App() {
     <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode}/>
     <Alert alerttext={alerttext}/>
     <div className='container'>
-    <TextForm labeltextbox='Paste the text below' mode={mode} setAlert={setAlert}/>
+    <Routes>
+        <Route path="/" element={<TextForm labeltextbox='Paste the text below' mode={mode} setAlert={setAlert}/>}/>
+        <Route path="about" element={<About/>} />
+      </Routes>
     </div>
     </>
   );
